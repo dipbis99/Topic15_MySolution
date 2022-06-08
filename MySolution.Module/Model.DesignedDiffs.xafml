@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="MySolution" Company="Andaze Ltd." Copyright="Copyright (C) 2022 {0:Company} ALL RIGHTS RESERVED">
+  <BOModel>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+  </BOModel>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.7.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <ListView Id="DemoTask_ListView">
+      <Columns>
+        <ColumnInfo Id="Priority" Index="1" />
+        <ColumnInfo Id="DueDate" Index="2" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application PreferredLanguage="(User language)">
+  <BOModel>
+    <Class Name="MySolution.Module.BusinessObjects.Contact">
+      <OwnMembers>
+        <Member Name="Manager" PropertyEditorType="MySolution.Module.Blazor.CustomStringPropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.7.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="Contact_DetailView">
+      <Items>
+        <PropertyEditor Id="FirstName" PropertyEditorType="MySolution.Module.Blazor.CustomStringPropertyEditor" />
+        <PropertyEditor Id="Notes" PropertyEditorType="MySolution.Module.Blazor.CustomStringPropertyEditor" MaxLength="5" />
+      </Items>
+    </DetailView>
+  </Views>
+</Application>
