@@ -84,6 +84,12 @@ namespace MySolution.Module.BusinessObjects
             get { return manager; }
             set { SetPropertyValue(nameof(Manager), ref manager, value); }
         }
+
+        [Association("Contact-Resumes")]
+        public XPCollection<Resume> Resumes
+        {
+            get { return GetCollection<Resume>(nameof(Resumes)); }
+        }
     }
     public enum TitleOfCourtesy { Dr, Miss, Mr, Mrs, Ms };
 

@@ -8,11 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DevExpress.ExpressApp.Xpo;
 using MySolution.Blazor.Server.Services;
+using DevExpress.ExpressApp.FileAttachments.Blazor;
 
 namespace MySolution.Blazor.Server {
     public partial class MySolutionBlazorApplication : BlazorApplication {
         public MySolutionBlazorApplication() {
             InitializeComponent();
+            Modules.Add(new FileAttachmentsBlazorModule());
         }
         protected override void OnSetupStarted() {
             base.OnSetupStarted();
