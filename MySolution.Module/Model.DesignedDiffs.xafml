@@ -1,16 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="MySolution" Company="Andaze Ltd." Copyright="Copyright (C) 2022 {0:Company} ALL RIGHTS RESERVED">
+  <ActionDesign>
+    <Actions>
+      <Action Id="ClearTaskAction" ToolTip="Clear the current Contact's tasks" ConfirmationMessage="Are you sure you want to clear all the tasks?" />
+      <Action Id="Task.MarkCompleted" ValidationContexts="MarkCompleted" />
+    </Actions>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Edit">
+        <ActionLink ActionId="ClearTaskAction" Index="0" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="View">
+        <ActionLink ActionId="ClearTaskAction" Removed="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
   <BOModel>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+    <Class Name="DevExpress.Persistent.BaseImpl.Task">
+      <OwnMembers>
+        <Member Name="DueDate" DisplayFormat="D" />
+        <Member Name="PercentCompleted" DisplayFormat="{0:N0}%" />
+        <Member Name="StartDate" DisplayFormat="D" />
+        <Member Name="Subject" RowCount="2" Size="200" />
+      </OwnMembers>
+    </Class>
+    <Class Name="MySolution.Module.BusinessObjects.Contact" ObjectCaptionFormat="{0:FullName} from the {0:Department}">
+      <OwnMembers>
+        <Member Name="Position" DataSourceProperty="Department.Positions" DataSourcePropertyIsNullMode="SelectAll" />
+      </OwnMembers>
+    </Class>
   </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="Note" ViewId="Note_ListView" Caption="Notes" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
   <SchemaModules>
-    <SchemaModule Name="SystemModule" Version="21.2.7.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="21.2.8.0" IsNewNode="True" />
   </SchemaModules>
+  <Validation>
+    <Rules>
+      <RuleCriteria Id="TaskIsNotStarted" Criteria="[Status] &lt;&gt; ##Enum#DevExpress.Persistent.Base.General.TaskStatus,NotStarted#" TargetContextIDs="MarkCompleted" TargetType="MySolution.Module.BusinessObjects.DemoTask" CustomMessageTemplate="Cannot set the task as completed because it has not started" IsNewNode="True" />
+    </Rules>
+  </Validation>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <DetailView Id="Contact_DetailView">
+      <Items>
+        <PropertyEditor Id="Department.Office" PropertyName="Department.Office" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="66.09124537607892">
+            <LayoutGroup Id="Contact" RelativeSize="43.47014925373134">
+              <LayoutGroup Id="Contact_col1" RelativeSize="50">
+                <LayoutItem Id="WebPageAddress" RelativeSize="23.91304347826087" />
+                <LayoutItem Id="NickName" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="SpouseName" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="TitleOfCourtesy" RelativeSize="41.30434782608695" />
+              </LayoutGroup>
+              <LayoutGroup Id="Contact_col2" RelativeSize="50">
+                <LayoutItem Id="Anniversary" RelativeSize="23.91304347826087" />
+                <LayoutItem Id="Department" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="Position" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="Manager" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="Department.Office" ViewItem="Department.Office" Index="4" RelativeSize="23.91304347826087" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Person" RelativeSize="35.26119402985075">
+              <LayoutGroup Id="Person_col1" RelativeSize="50">
+                <LayoutItem Id="FirstName" RelativeSize="28.94736842105263" />
+                <LayoutItem Id="LastName" RelativeSize="21.05263157894737" />
+                <LayoutItem Id="MiddleName" RelativeSize="50" />
+              </LayoutGroup>
+              <LayoutGroup Id="Person_col2" RelativeSize="50">
+                <LayoutItem Id="DisplayName" ViewItem="DisplayName" Index="0" RelativeSize="28.94736842105263" IsNewNode="True" />
+                <LayoutItem Id="Birthday" Index="1" RelativeSize="21.05263157894737" />
+                <LayoutItem Id="FullName" Index="2" RelativeSize="21.05263157894737" />
+                <LayoutItem Id="Email" Index="3" RelativeSize="28.94736842105263" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Party" RelativeSize="21.26865671641791">
+              <LayoutItem Id="Photo" RelativeSize="35.96491228070175" />
+              <LayoutItem Id="Address1" RelativeSize="28.07017543859649" />
+              <LayoutItem Id="Address2" RelativeSize="35.96491228070175" />
+              <LayoutItem Id="DisplayName" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="12.20715166461159">
+            <LayoutItem Id="Notes" RelativeSize="100" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="21.701602959309493">
+            <LayoutGroup Id="Tasks" RelativeSize="100">
+              <LayoutItem Id="Tasks" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Resumes" RelativeSize="100">
+              <LayoutItem Id="Resumes" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="PhoneNumbers" RelativeSize="100">
+              <LayoutItem Id="PhoneNumbers" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="DemoTask_ListView">
       <Columns>
         <ColumnInfo Id="Priority" Index="1" />
