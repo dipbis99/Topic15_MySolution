@@ -35,7 +35,7 @@ namespace MySolution.Module.Controllers
         {
 
             base.OnActivated();
-            View.CollectionSource.Criteria["Developers"] = CriteriaOperator.FromLambda<Contact>(c => c.Position.Title == "Developer");
+            //View.CollectionSource.Criteria["Developers"] = CriteriaOperator.FromLambda<Contact>(c => c.Position.Title == "Developer");
         }
 
 

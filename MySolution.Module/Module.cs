@@ -17,6 +17,7 @@ using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.Xpo;
 using DevExpress.ExpressApp.Xpo;
+using DevExpress.ExpressApp.ViewVariantsModule;
 
 namespace MySolution.Module {
     // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ModuleBase.
@@ -24,6 +25,7 @@ namespace MySolution.Module {
         public MySolutionModule() {
             InitializeComponent();
             AdditionalExportedTypes.Add(typeof(Note));
+            this.RequiredModuleTypes.Add(typeof(ViewVariantsModule));
         }
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB) {
             ModuleUpdater updater = new DatabaseUpdate.Updater(objectSpace, versionFromDB);
