@@ -30,7 +30,7 @@
       </OwnMembers>
     </Class>
   </BOModel>
-  <NavigationItems>
+  <NavigationItems GenerateRelatedViewVariantsGroup="True">
     <Items>
       <Item Id="Default">
         <Items>
